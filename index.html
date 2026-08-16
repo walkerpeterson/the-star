@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Shrinking Superlative</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Roanoke Star's Fine Print</title>
 <style>
   :root{
     --bg-0:#0a0e1f;
@@ -38,46 +38,39 @@
     color:var(--ink-0);
     display:flex;
     justify-content:center;
-    padding:56px 20px 80px;
+    padding:26px 14px 36px;
   }
-  .wrap{max-width:760px; width:100%;}
-  .eyebrow{
-    text-transform:uppercase;
-    letter-spacing:.18em;
-    font-size:12px;
-    color:var(--gold-dim);
-    text-align:center;
-    margin-bottom:10px;
-    font-family:Arial, Helvetica, sans-serif;
-  }
+  .wrap{max-width:640px; width:100%;}
+
   h1{
     text-align:center;
-    font-size:38px;
+    font-size:clamp(21px, 6vw, 30px);
     font-weight:400;
-    margin:0 0 8px;
+    margin:0 0 6px;
     color:var(--ink-0);
     letter-spacing:.01em;
+    line-height:1.15;
   }
   h1 .accent{color:var(--gold);}
   .lede{
     text-align:center;
     color:var(--ink-1);
-    font-size:15px;
-    max-width:520px;
-    margin:0 auto 44px;
-    line-height:1.6;
+    font-size:12.5px;
+    max-width:440px;
+    margin:0 auto 18px;
+    line-height:1.5;
     font-family:Arial, Helvetica, sans-serif;
   }
 
   .sentence-card{
     background:var(--card);
     border:1px solid var(--card-border);
-    border-radius:14px;
-    padding:36px 32px;
-    font-size:22px;
-    line-height:1.9;
+    border-radius:12px;
+    padding:16px 16px;
+    font-size:clamp(15px, 4.3vw, 19px);
+    line-height:1.65;
     text-align:center;
-    box-shadow:0 20px 50px -20px rgba(0,0,0,.6);
+    box-shadow:0 14px 34px -18px rgba(0,0,0,.6);
   }
   .qual{
     cursor:pointer;
@@ -110,28 +103,28 @@
   .hint{
     text-align:center;
     font-family:Arial, Helvetica, sans-serif;
-    font-size:12.5px;
+    font-size:10.5px;
     color:var(--ink-2);
-    margin-top:14px;
+    margin-top:8px;
     letter-spacing:.02em;
   }
 
   .controls{
     display:flex;
     justify-content:center;
-    gap:10px;
-    margin-top:26px;
+    gap:8px;
+    margin-top:12px;
     flex-wrap:wrap;
   }
   button{
     font-family:Arial, Helvetica, sans-serif;
-    font-size:12.5px;
-    letter-spacing:.04em;
+    font-size:11px;
+    letter-spacing:.03em;
     text-transform:uppercase;
     background:transparent;
     border:1px solid var(--card-border);
     color:var(--ink-1);
-    padding:9px 16px;
+    padding:7px 13px;
     border-radius:999px;
     cursor:pointer;
     transition:border-color .2s, color .2s;
@@ -139,11 +132,11 @@
   button:hover{border-color:var(--gold-dim); color:var(--gold);}
 
   .result{
-    margin-top:46px;
+    margin-top:16px;
     background:linear-gradient(155deg, #151c42, #0f1330);
     border:1px solid var(--card-border);
-    border-radius:16px;
-    padding:38px 36px;
+    border-radius:14px;
+    padding:16px;
     position:relative;
     overflow:hidden;
   }
@@ -154,56 +147,104 @@
     background:radial-gradient(circle at 85% -10%, rgba(232,196,104,.14), transparent 55%);
     pointer-events:none;
   }
+  .result-top{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    position:relative;
+  }
+  .result-photo, .result-fallback{
+    width:60px;
+    height:60px;
+    border-radius:11px;
+    flex-shrink:0;
+    object-fit:cover;
+    box-shadow:0 6px 16px -6px rgba(0,0,0,.7);
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .result-fallback{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    background:linear-gradient(155deg,#1c2456,#0f1330);
+  }
+  .result-heading{min-width:0;}
   .result-label{
     font-family:Arial, Helvetica, sans-serif;
-    font-size:11px;
-    letter-spacing:.18em;
+    font-size:10px;
+    letter-spacing:.14em;
     text-transform:uppercase;
     color:var(--gold-dim);
-    margin-bottom:10px;
+    margin-bottom:2px;
   }
-  .result-emoji{font-size:40px; margin-bottom:6px; display:block;}
   .result-title{
-    font-size:28px;
+    font-size:clamp(17px, 5vw, 21px);
     color:var(--ink-0);
-    margin:0 0 6px;
+    margin:0;
+    line-height:1.2;
   }
   .result-sub{
     font-family:Arial, Helvetica, sans-serif;
     color:var(--gold);
-    font-size:13px;
-    letter-spacing:.03em;
-    margin-bottom:16px;
+    font-size:11.5px;
+    letter-spacing:.02em;
+    margin-top:2px;
   }
   .result-text{
     font-family:Arial, Helvetica, sans-serif;
     color:var(--ink-1);
-    font-size:15px;
-    line-height:1.7;
-    max-width:600px;
+    font-size:13.2px;
+    line-height:1.6;
+    margin:10px 0 0;
+    position:relative;
   }
   .result-facts{
-    margin-top:18px;
-    padding-top:16px;
+    margin-top:12px;
+    padding-top:12px;
     border-top:1px solid var(--card-border);
-    display:flex;
-    flex-wrap:wrap;
-    gap:22px;
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:8px 14px;
     font-family:Arial, Helvetica, sans-serif;
+    position:relative;
   }
-  .fact{min-width:120px;}
-  .fact-num{font-size:19px; color:var(--gold); font-family:Georgia, serif;}
-  .fact-label{font-size:11px; color:var(--ink-2); text-transform:uppercase; letter-spacing:.06em; margin-top:2px;}
+  .fact-num{font-size:15.5px; color:var(--gold); font-family:Georgia, serif;}
+  .fact-label{font-size:9px; color:var(--ink-2); text-transform:uppercase; letter-spacing:.05em; margin-top:1px;}
 
-  footer{
-    text-align:center;
-    margin-top:50px;
+  .result-credit{
     font-family:Arial, Helvetica, sans-serif;
-    font-size:11.5px;
+    font-size:9.5px;
     color:var(--ink-2);
-    line-height:1.8;
+    opacity:.75;
+    margin-top:10px;
+    position:relative;
   }
-  footer a{color:var(--ink-1);}
+  .result-credit a{color:var(--ink-2);}
+
+  details.footer{
+    margin-top:18px;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+  details.footer summary{
+    text-align:center;
+    font-size:11px;
+    color:var(--ink-2);
+    cursor:pointer;
+    list-style:none;
+  }
+  details.footer summary::-webkit-details-marker{display:none;}
+  details.footer summary:hover{color:var(--ink-1);}
+  details.footer summary::after{content:" ▾"; }
+  details.footer[open] summary::after{content:" ▴"; }
+  details.footer p{
+    text-align:center;
+    font-size:10.5px;
+    color:var(--ink-2);
+    line-height:1.7;
+    max-width:520px;
+    margin:8px auto 0;
+  }
 </style>
 </head>
 <body>
@@ -211,8 +252,8 @@
 
   <h1>The Roanoke Star's <span class="accent">Fine Print</span></h1>
   <p class="lede">
-    The Roanoke Star holds its title through five stacked qualifiers.
-    Click any word below to remove that requirement and see who takes the crown once it's gone.
+    The Roanoke Star holds its title through five stacked qualifiers. Tap a word to drop that
+    requirement and see who takes the crown.
   </p>
 
   <div class="sentence-card">
@@ -224,7 +265,7 @@
     <span class="plain">star</span>
     <span class="qual" data-filter="east">east of the Mississippi</span><span class="plain">.</span>
   </div>
-  <div class="hint">click a word to strike it out</div>
+  <div class="hint">tap a word to strike it out</div>
 
   <div class="controls">
     <button id="reset">Reset all filters</button>
@@ -235,13 +276,18 @@
     <!-- filled by JS -->
   </div>
 
-  <footer>
-    Facts on the Roanoke Star, El Paso's Star on the Mountain, and Palmanova drawn from Wikipedia, the World Record
-    Academy, and Visit Roanoke VA. No official body tracks "largest non-illuminated man-made star-shaped structure" —
-    Palmanova is the strongest documented candidate, not a certified record holder. Stellar radii for hypergiants like
-    Stephenson 2-18 and UY Scuti are genuinely disputed in the astronomical literature — measuring the edge of a star
-    19,000 light-years away is imprecise work. Built for fun, not for a courtroom.
-  </footer>
+  <details class="footer">
+    <summary>Sources &amp; notes</summary>
+    <p>
+      Facts on the Roanoke Star, El Paso's Star on the Mountain, and Palmanova drawn from Wikipedia, the World Record
+      Academy, and Visit Roanoke VA. No official body tracks "largest non-illuminated man-made star-shaped structure" —
+      Palmanova is the strongest documented candidate, not a certified record holder. Stellar radii for hypergiants like
+      Stephenson 2-18 and UY Scuti are genuinely disputed in the astronomical literature. Photos: Roanoke Star and
+      Palmanova via Wikimedia Commons; El Paso's star by Carol M. Highsmith, Library of Congress (public domain);
+      Antares artist's impression (stand-in for Stephenson 2-18, which has never been directly imaged) by ESO/M.
+      Kornmesser, CC BY 4.0; the Sun via NASA's Solar Dynamics Observatory. Built for fun, not for a courtroom.
+    </p>
+  </details>
 </div>
 
 <script>
@@ -274,15 +320,19 @@ function outcome(f){
         title:'The Sun',
         sub:'93 million miles away · no electrical cord required',
         text:"Remove every qualifier and the question collapses into \"what is a star?\" The honest, unglamorous answer: the nearest one is the Sun. It doesn't have to be the biggest, the most freestanding, or east of anything. It just has to be a star, and it's the one currently keeping you alive.",
-        facts:[["1","star, technically"], ["8 min","light travel time to Earth"], ["4.6B yrs","age"]]
+        facts:[["1","star, technically"], ["8 min","light travel time"], ["4.6B yrs","age"]],
+        photo:"https://en.wikipedia.org/wiki/Special:FilePath/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg",
+        credit:"Photo: NASA / Solar Dynamics Observatory"
       };
     }
     return {
       emoji:'🔴',
       title:'Stephenson 2-18 (probably)',
       sub:'red hypergiant · ~19,000 light-years away',
-      text:"Drop \"man-made\" and you leave tourist landmarks for actual astrophysics. Stephenson 2-18, a red hypergiant in the constellation Scutum, is among the largest stars ever measured — roughly 2,150 times the Sun's radius by some estimates. UY Scuti is the other perennial contender for the title. Astronomers still argue about the exact number, because measuring the edge of a star from 19,000 light-years away is exactly as hard as it sounds.",
-      facts:[["~2,150×","Sun's radius (estimated)"],["19,000 ly","distance"],["disputed","measurement status"]]
+      text:"Drop \"man-made\" and you leave tourist landmarks for actual astrophysics. Stephenson 2-18, a red hypergiant in the constellation Scutum, is among the largest stars ever measured — roughly 2,150 times the Sun's radius by some estimates. UY Scuti is the other perennial contender. Astronomers still argue about the exact number, because measuring the edge of a star from 19,000 light-years away is exactly as hard as it sounds.",
+      facts:[["~2,150×","Sun's radius (est.)"],["19,000 ly","distance"],["disputed","measurement"]],
+      photo:"https://cdn.eso.org/images/large/eso1726b.jpg",
+      credit:"Illustration: ESO/M. Kornmesser — artist's impression of Antares, a stand-in; no telescope has ever resolved Stephenson 2-18 itself"
     };
   }
 
@@ -292,8 +342,10 @@ function outcome(f){
       emoji:'🏰',
       title:'Palmanova',
       sub:'Friuli-Venezia Giulia, Italy',
-      text:"Turn off illumination and there's no official body crowning a \"largest man-made star-shaped structure\" — but there's a strong real candidate. Palmanova is an entire fortress town built by the Venetian Republic in 1593 as a nine-pointed star, walls and all. It's routinely cited as one of the largest and best-preserved star-shaped fortifications ever built, dwarfing individual star forts like Fort Jefferson or Neuf-Brisach simply because it's a whole functioning city, not just a fort.",
-      facts:[["9","points"],["7 km","wall circumference"],["13.32 km²","enclosed area"],["1593","founded"]]
+      text:"Turn off illumination and there's no official body crowning a \"largest man-made star-shaped structure\" — but there's a strong real candidate. Palmanova is an entire fortress town built by the Venetian Republic in 1593 as a nine-pointed star, walls and all. It's routinely cited as one of the largest and best-preserved star-shaped fortifications ever built.",
+      facts:[["9","points"],["7 km","wall circumference"],["13.32 km²","enclosed area"],["1593","founded"]],
+      photo:"https://en.wikipedia.org/wiki/Special:FilePath/Aerial_image_of_Palmanova_(view_from_the_northwest).jpg",
+      credit:"Photo via Wikimedia Commons"
     };
   }
 
@@ -310,9 +362,7 @@ function outcome(f){
 
   // 4. Man-made, illuminated, largest all still required
   if(!f.free){
-    // free-standing no longer required
     if(f.east){
-      // still restricted to east of the Mississippi, so the bigger west-coast rival is blocked out
       return roanoke("Free-standing is no longer required, but the bigger rival — El Paso's Star on the Mountain — is west of the Mississippi, so \"east of the Mississippi\" is still blocking it. Drop that filter too and it takes over.", 'east');
     }
     return {
@@ -320,12 +370,12 @@ function outcome(f){
       title:'Star on the Mountain',
       sub:'Franklin Mountains, El Paso, Texas',
       text:"Once \"free-standing\" is off the table, a much bigger rival appears — just west of the river. El Paso's mountainside star is built into the slope of the Franklin Mountains rather than standing on its own structure, which is the only reason it didn't already hold the Roanoke Star's title.",
-      facts:[["459 ft","tall"],["278 ft","wide"],["1940","first lit"]]
+      facts:[["459 ft","tall"],["278 ft","wide"],["1940","first lit"]],
+      photo:"https://cdn18.picryl.com/photo/2019/10/04/a-large-illuminated-star-high-above-el-paso-texas-on-franklin-mountain-has-77a6c3-1024.jpg",
+      credit:"Photo: Carol M. Highsmith, Library of Congress (public domain)"
     };
   }
 
-  // free-standing still required -> Roanoke wins regardless of the east filter,
-  // since it's the world record holder for this exact combination
   return roanoke(f.east
     ? "All five qualifiers are active. This is the original claim, fully intact."
     : "Dropping \"east of the Mississippi\" doesn't change the answer — Roanoke's is the record holder worldwide for this combination, not just regionally.");
@@ -337,7 +387,9 @@ function roanoke(note, blockedBy){
     title:'The Roanoke Star',
     sub:'Mill Mountain, Roanoke, Virginia',
     text:"Built in 1949 as a Christmas decoration that never came down, the Roanoke Star still holds the title: the world's largest free-standing, man-made, illuminated star. " + note,
-    facts:[["88.5 ft","tall"],["60,000 lb","weight"],["1949","built"],["60 mi","visible on a clear night"]],
+    facts:[["88.5 ft","tall"],["60,000 lb","weight"],["1949","built"],["60 mi","visible range"]],
+    photo:"https://en.wikipedia.org/wiki/Special:FilePath/Roanoke_star.jpg",
+    credit:"Photo via Wikimedia Commons",
     blockedBy
   };
 }
@@ -357,13 +409,24 @@ function render(){
     `<div class="fact"><div class="fact-num">${num}</div><div class="fact-label">${label}</div></div>`
   ).join('');
 
+  const photoHtml = o.photo
+    ? `<img class="result-photo" src="${o.photo}" alt="${o.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+    : '';
+  const fallbackDisplay = o.photo ? 'display:none;' : 'display:flex;';
+
   document.getElementById('result').innerHTML = `
-    <div class="result-label">Current title holder</div>
-    <span class="result-emoji">${o.emoji}</span>
-    <h2 class="result-title">${o.title}</h2>
-    <div class="result-sub">${o.sub}</div>
+    <div class="result-top">
+      ${photoHtml}
+      <div class="result-fallback" style="${fallbackDisplay}">${o.emoji}</div>
+      <div class="result-heading">
+        <div class="result-label">Current title holder</div>
+        <h2 class="result-title">${o.title}</h2>
+        <div class="result-sub">${o.sub}</div>
+      </div>
+    </div>
     <p class="result-text">${o.text}</p>
     <div class="result-facts">${factsHtml}</div>
+    ${o.credit ? `<div class="result-credit">${o.credit}</div>` : ''}
   `;
 }
 
